@@ -10,9 +10,11 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
     <link
       rel="stylesheet"
-      href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css" />
+      href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"
+      id="theme-style" />
   </head>
   <body>
     <div id="app"></div>
@@ -21,6 +23,24 @@
         name: "",
         repo: "",
       };
+    </script>
+    <!-- Toggles between light/dark mode based on browser prefrence. -->
+    <script>
+      function toggleTheme(preferDark) {
+        const themeStyle = document.getElementById("theme-style");
+        themeStyle.href = preferDark
+          ? "//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css"
+          : "//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css";
+      }
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      );
+
+      toggleTheme(darkModeMediaQuery.matches);
+      darkModeMediaQuery.addEventListener("change", (e) =>
+        toggleTheme(e.matches)
+      );
     </script>
     <!-- Docsify v4 -->
     <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
